@@ -18,8 +18,7 @@
 /bin/echo "This script will auto-setup a Tor proxy for you. It is recommend that you
 run this script on a fresh installation of Raspbian."
 
-echo -n "Press [Enter] key to begin.." 
-read start 
+/bin/read -p "Press [Enter] key to begin.." 
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
