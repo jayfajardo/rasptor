@@ -73,7 +73,6 @@ INTERFACES="wlan0"
 isc_dhcp_configuration
 
 /bin/echo "Configuring Interfaces.."
-/bin/cat /dev/null > /etc/network/interfaces
 
 /etc/network/interfaces <<'interfaces_configuration'
 auto lo
@@ -93,7 +92,7 @@ interfaces_configuration
 sudo ifconfig wlan0 $IP_ADDRESS 
 
 /bin/echo "Configuring hostapd.."
-/bin/cat /dev/null > /etc/hostapd/hostapd.conf
+# /bin/cat /dev/null > /etc/hostapd/hostapd.conf
 /etc/hostapd/hostapd.conf <<'hostapd_configuration'
 interface=wlan0
 driver=nl80211
@@ -138,7 +137,7 @@ sudo update-rc.d isc-dhcp-server enable
 
 
 /bin/echo "Configuring Tor.."
-/bin/cat /dev/null > /etc/tor/torrc_tmp
+# /bin/cat /dev/null > /etc/tor/torrc_tmp
 /etc/tor/torrc <<'tor_configuration_tmp'
 Log notice file /var/log/tor/notices.log 
 VirtualAddrNetwork 10.192.0.0/10
