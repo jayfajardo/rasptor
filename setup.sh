@@ -18,7 +18,7 @@
 /bin/echo "This script will auto-setup a Tor proxy for you. It is recommend that you
 run this script on a fresh installation of Raspbian."
 
-/bin/read -p "Press [Enter] key to begin.."
+read -p "Press [Enter] key to begin.."
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
@@ -54,7 +54,7 @@ http://www.raspberrypi.org/phpBB3/viewtopic.php?f=66&t=68263"
 
 /bin/echo "Configuring DHCP.."
 
-/etc/dhcp/dhcpd.conf <<'dhcp_configuration'
+/bin/cat <<dhcp_configuration >> /etc/dhcp/dhcpd.conf 
 # RaspTor
 authoritative;
 subnet 192.168.42.0 netmask 255.255.255.0 {
@@ -69,14 +69,14 @@ option domain-name-servers 208.67.222.222, 208.232.220.220;
 dhcp_configuration
 
 
-/bin/cat <<'isc_dhcp_configuration' >> /etc/default/isc-dhcp-server
+/bin/cat <<isc_dhcp_configuration >> /etc/default/isc-dhcp-server
 INTERFACES="wlan0"
 isc_dhcp_configuration
 
 /bin/echo "Configuring Interfaces.."
 
 /bin/cat /dev/null > /etc/network/interfaces
-/bin/cat <<'interfaces_configuration' >> /etc/network/interfaces
+/bin/cat <<interfaces_configuration >> /etc/network/interfaces
 auto lo
 
 iface lo inet loopback
@@ -95,7 +95,7 @@ sudo ifconfig wlan0 $IP_ADDRESS
 
 /bin/echo "Configuring hostapd.."
 /bin/cat /dev/null > /etc/hostapd/hostapd.conf
-/bin/cat <<'hostapd_configuration' >> /etc/hostapd/hostapd.conf 
+/bin/cat <<hostapd_configuration >> /etc/hostapd/hostapd.conf 
 interface=wlan0
 driver=nl80211
 ssid=${SSID}
@@ -111,12 +111,12 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 hostapd_configuration
 
-/bin/cat <<'hostapd_default' >> /etc/default/hostapd 
+/bin/cat <<hostapd_default >> /etc/default/hostapd 
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 hostapd_default
 
 /bin/echo "Configuring NAT and Routing.."
-/bin/cat <<'sysctl_configuration' >> /etc/sysctl.conf 
+/bin/cat <<sysctl_configuration >> /etc/sysctl.conf 
 net.ipv4.ip_forward=1
 sysctl_configuration
 
@@ -136,7 +136,7 @@ sudo update-rc.d isc-dhcp-server enable
 
 /bin/echo "Configuring Tor.."
 /bin/cat /dev/null > /etc/tor/torrc_tmp
-/bin/cat <<'tor_configuration_tmp' >> /etc/tor/torrc 
+/bin/cat <<tor_configuration_tmp >> /etc/tor/torrc 
 Log notice file /var/log/tor/notices.log 
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsSuffixes .onion,.exit 
