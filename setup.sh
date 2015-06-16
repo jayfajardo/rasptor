@@ -22,7 +22,7 @@ read -p "Press [Enter] key to begin.."
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
-SSID="rasptor" 
+SSID="RaspTor" 
 WPA2="raspberry"
 CHANNEL="6"
 
