@@ -136,7 +136,7 @@ sudo update-rc.d isc-dhcp-server enable
 
 /bin/echo "Configuring Tor.."
 /bin/cat /dev/null > /etc/tor/torrc_tmp
-/bin/cat <<tor_configuration_tmp >> /etc/tor/torrc 
+/bin/cat <<tor_configuration_tmp >> /etc/tor/torrc_tmp 
 Log notice file /var/log/tor/notices.log 
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsSuffixes .onion,.exit 
@@ -148,7 +148,7 @@ DNSListenAddress ${IP_ADDRESS}
 tor_configuration_tmp
 
 /bin/cat /etc/tor/torcc >> /etc/tor/torrc_tmp
-/bin/cat /etc/tor/torrc_tmp > /etc/tor/torcc
+/bin/cat /etc/tor/torrc_tmp > /etc/tor/torrc
 
 /bin/echo "Configuring routing tables to redirect TCP traffic through TOR.."
 sudo iptables -F
