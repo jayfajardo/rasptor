@@ -54,7 +54,7 @@ http://www.raspberrypi.org/phpBB3/viewtopic.php?f=66&t=68263"
 
 /bin/echo "Configuring DHCP.."
 
-/etc/dhcp/dhcpd.conf <<'dhcp_configuration'
+sudo /etc/dhcp/dhcpd.conf <<'dhcp_configuration'
 # RaspTor
 authoritative;
 subnet 192.168.42.0 netmask 255.255.255.0 {
@@ -68,13 +68,15 @@ option domain-name-servers 208.67.222.222, 208.232.220.220;
 }
 dhcp_configuration
 
-/etc/default/isc-dhcp-server <<'isc_dhcp_configuration'
+
+sudo /etc/default/isc-dhcp-server <<'isc_dhcp_configuration'
 INTERFACES="wlan0"
 isc_dhcp_configuration
 
 /bin/echo "Configuring Interfaces.."
 
-/etc/network/interfaces <<'interfaces_configuration'
+sudo /bin/cat /dev/null > /etc/network/interfaces
+sudo /etc/network/interfaces <<'interfaces_configuration'
 auto lo
 
 iface lo inet loopback
@@ -92,8 +94,8 @@ interfaces_configuration
 sudo ifconfig wlan0 $IP_ADDRESS 
 
 /bin/echo "Configuring hostapd.."
-# /bin/cat /dev/null > /etc/hostapd/hostapd.conf
-/etc/hostapd/hostapd.conf <<'hostapd_configuration'
+sudo /bin/cat /dev/null > /etc/hostapd/hostapd.conf
+sudo /etc/hostapd/hostapd.conf <<'hostapd_configuration'
 interface=wlan0
 driver=nl80211
 ssid=${SSID}
@@ -109,12 +111,12 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 hostapd_configuration
 
-/etc/default/hostapd <<'hostapd_default'
+sudo /etc/default/hostapd <<'hostapd_default'
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 hostapd_default
 
 /bin/echo "Configuring NAT and Routing.."
-/etc/sysctl.conf <<'sysctl_configuration'
+sudo /etc/sysctl.conf <<'sysctl_configuration'
 net.ipv4.ip_forward=1
 sysctl_configuration
 
@@ -125,10 +127,6 @@ sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -
 sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-/etc/network/interfaces <<'iptables_configuration'
-up iptables-restore < /etc/iptables.ipv4.nat
-iptables_configuration
-
 /bin/echo "Registering daemons as a service.."
 sudo service hostapd start
 sudo service isc-dhcp-server start
@@ -137,8 +135,8 @@ sudo update-rc.d isc-dhcp-server enable
 
 
 /bin/echo "Configuring Tor.."
-# /bin/cat /dev/null > /etc/tor/torrc_tmp
-/etc/tor/torrc <<'tor_configuration_tmp'
+sudo /bin/cat /dev/null > /etc/tor/torrc_tmp
+sudo /etc/tor/torrc <<'tor_configuration_tmp'
 Log notice file /var/log/tor/notices.log 
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsSuffixes .onion,.exit 
