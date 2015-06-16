@@ -19,7 +19,7 @@
 run this script on a fresh installation of Raspbian."
 
 echo -n "Press [Enter] key to begin.." 
-read START
+read start 
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
