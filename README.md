@@ -18,7 +18,7 @@ Setup
 -----
 Copy & paste the following commands into your terminal and follow the commands provided
 
-    curl -fsSL https://raw.github.com/breadtk/onion_pi/master/setup.sh | sudo sh
+    curl -fsSL https://raw.github.com/jayfajardo/rasptor/master/setup.sh | sudo sh
 
 
 
