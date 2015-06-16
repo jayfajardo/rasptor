@@ -64,7 +64,7 @@ option routers 192.168.42.1;
 default-lease-time 600;
 max-lease-time 7200;
 option domain-name "local";
-option domain-name-servers 208.67.222.222, 208.232.220.220;
+option domain-name-servers 208.67.222.222, 208.67.220.220;
 }
 dhcp_configuration
 
