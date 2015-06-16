@@ -69,14 +69,14 @@ option domain-name-servers 208.67.222.222, 208.232.220.220;
 dhcp_configuration
 
 
-/etc/default/isc-dhcp-server <<'isc_dhcp_configuration'
+/bin/cat <<'isc_dhcp_configuration' >> /etc/default/isc-dhcp-server
 INTERFACES="wlan0"
 isc_dhcp_configuration
 
 /bin/echo "Configuring Interfaces.."
 
 /bin/cat /dev/null > /etc/network/interfaces
-/etc/network/interfaces <<'interfaces_configuration'
+/bin/cat <<'interfaces_configuration' >> /etc/network/interfaces
 auto lo
 
 iface lo inet loopback
@@ -95,7 +95,7 @@ sudo ifconfig wlan0 $IP_ADDRESS
 
 /bin/echo "Configuring hostapd.."
 /bin/cat /dev/null > /etc/hostapd/hostapd.conf
-/etc/hostapd/hostapd.conf <<'hostapd_configuration'
+/bin/cat <<'hostapd_configuration' >> /etc/hostapd/hostapd.conf 
 interface=wlan0
 driver=nl80211
 ssid=${SSID}
@@ -111,12 +111,12 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 hostapd_configuration
 
-/etc/default/hostapd <<'hostapd_default'
+/bin/cat <<'hostapd_default' >> /etc/default/hostapd 
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 hostapd_default
 
 /bin/echo "Configuring NAT and Routing.."
-/etc/sysctl.conf <<'sysctl_configuration'
+/bin/cat <<'sysctl_configuration' >> /etc/sysctl.conf 
 net.ipv4.ip_forward=1
 sysctl_configuration
 
@@ -136,7 +136,7 @@ sudo update-rc.d isc-dhcp-server enable
 
 /bin/echo "Configuring Tor.."
 /bin/cat /dev/null > /etc/tor/torrc_tmp
-/etc/tor/torrc <<'tor_configuration_tmp'
+/bin/cat <<'tor_configuration_tmp' >> /etc/tor/torrc 
 Log notice file /var/log/tor/notices.log 
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsSuffixes .onion,.exit 
