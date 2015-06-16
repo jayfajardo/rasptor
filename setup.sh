@@ -18,7 +18,8 @@
 /bin/echo "This script will auto-setup a Tor proxy for you. It is recommend that you
 run this script on a fresh installation of Raspbian."
 
-read -p "Press [Enter] key to begin.." START
+echo -n "Press [Enter] key to begin.." 
+read START
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
@@ -26,10 +27,17 @@ SSID="rasptor"
 WPA2="raspberry"
 CHANNEL="6"
 
-# read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS
-read -p "Enter your desired WLAN SSID <${SSID}> :" SSID
-read -p "Enter your desired WPA2 key <${WPA2}> :}" WPA2
-read -p "Enter your desired WLAN radio channel <${CHANNEL}> :" CHANNEL
+# echo -n "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" 
+# read IP_ADDRESS
+
+echo -n "Enter your desired WLAN SSID <${SSID}> :" 
+read SSID
+
+echo -n "Enter your desired WPA2 key <${WPA2}> :}"
+read WPA2
+
+echo -n "Enter your desired WLAN radio channel <${CHANNEL}> :" 
+read CHANNEL
 
 /bin/echo "Updating package index.."
 /usr/bin/apt-get update -y
