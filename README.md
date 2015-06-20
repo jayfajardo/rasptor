@@ -36,7 +36,7 @@ Run the install script and follow the prompts.
 
 Usage
 -----
-After your Pi reboots, it will broadcast its SSID as `RaspTor`. You can connect to it by using the WPA2 password `raspberry`.
+After your Pi reboots, it will broadcast the SSID you entered during set up or `RaspTor` if you chose the default. You can connect to it by using the WPA2 password you entered during set up or `raspberry` if you chose the defaul.
 
 After you have connected to your RaspTor, you can verify that you are routing through the Tor proxy by visiting http://check.torproject.org.
 
