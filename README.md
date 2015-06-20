@@ -24,11 +24,11 @@ Setup
 
 2. Clone the repository
 
-    git clone https://github.com/jayfajardo/rasptor.git
+    ``git clone https://github.com/jayfajardo/rasptor.git``
 
 3. Go into the local repo.
 
-    cd rasptor
+    `cd rasptor`
 
 4. Run the install script and follow the prompts.
 
