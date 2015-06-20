@@ -26,17 +26,13 @@ SSID="RaspTor"
 WPA2="raspberry"
 CHANNEL="6"
 
-# echo -n "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" 
-# read IP_ADDRESS
+# read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
 
-# echo -n "Enter your desired WLAN SSID <${SSID}> :" 
-# read SSID
-# 
-# echo -n "Enter your desired WPA2 key <${WPA2}> :}"
-# read WPA2
-# 
-# echo -n "Enter your desired WLAN radio channel <${CHANNEL}> :" 
-# read CHANNEL
+read -p "Enter your desired WLAN SSID <${SSID}> :" SSID
+
+read -p "Enter your desired WPA2 key <${WPA2}> :}" WPA2
+ 
+read -p "Enter your desired WLAN radio channel <${CHANNEL}> :" CHANNEL
 
 /bin/echo "Updating package index.."
 /usr/bin/apt-get update -y
@@ -49,7 +45,7 @@ http://www.raspberrypi.org/phpBB3/viewtopic.php?f=66&t=68263"
 /usr/bin/apt-get upgrade -y
 
 /bin/echo "Downloading and installing various packages.."
-/usr/bin/apt-get install -y hostapd isc-dhcp-server tor 
+/usr/bin/apt-get install -y hostpapd isc-dhcp-server tor 
 
 # DHCP
 /bin/echo "Configuring DHCP.."
@@ -172,6 +168,7 @@ sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-p
 sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
 
 /bin/echo "Enable TOR to run on boot.."
 sudo update-rc.d tor enable

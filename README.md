@@ -20,5 +20,12 @@ Copy & paste the following commands into your terminal and follow the commands p
 
     curl -fsSL https://raw.github.com/jayfajardo/rasptor/master/setup.sh | sudo sh
 
+Usage
+-----
+After your Pi reboots, it will broadcast its SSID as `RaspTor`. You can connect to it by using the WPA2 password `raspberry`.
+
+After you have connected to your RaspTor, you can verify that you are routing through the Tor proxy by visiting http://check.torproject.org.
+
+
 
 
