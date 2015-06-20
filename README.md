@@ -40,6 +40,10 @@ After your Pi reboots, it will broadcast the SSID you entered during set up or `
 
 After you have connected to your RaspTor, you can verify that you are routing through the Tor proxy by visiting http://check.torproject.org.
 
+Contribute
+----------
+
+Fork it and submit a pull request.
 
 
 
