@@ -21,14 +21,14 @@ read -p "Press [Enter] key to begin.." pause
 
 DEFAULT_IP_ADDRESS="192.168.42.1"
 DEFAULT_SSID="RaspTor" 
-DEFAULT_WPA2="raspberry'"
+DEFAULT_WPA2="raspberry"
 DEFAULT_CHANNEL="6"
 
 # read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
 
 read -p "Enter your desired WLAN SSID [${DEFAULT_SSID}] :" SSID 
 
-read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :}" WPA2
+read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :" WPA2
  
 read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
@@ -101,7 +101,7 @@ interfaces_configuration
 sudo ifconfig wlan0 $IP_ADDRESS 
 
 /bin/echo "Configuring hostapd.."
-/cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.sample
+cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.sample
 /bin/cat /dev/null > /etc/hostapd/hostapd.conf
 /bin/cat <<hostapd_configuration >> /etc/hostapd/hostapd.conf 
 interface=wlan0
