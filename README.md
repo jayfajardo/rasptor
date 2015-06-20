@@ -20,20 +20,17 @@ Requirements
 Setup
 -----
 
-1. Make sure your Pi is connected to the internet using the ethernet port and log in to your Pi.
+Make sure your Pi is connected to the internet using the ethernet port and log in to your Pi.
 
-2. Clone the repository
-
+Clone the repository
 
     git clone https://github.com/jayfajardo/rasptor.git
 
-3. Go into the local repo.
-
+Go into the local repo.
 
     cd rasptor
 
-4. Run the install script and follow the prompts.
-
+Run the install script and follow the prompts.
 
     sudo ./setup.sh
 
