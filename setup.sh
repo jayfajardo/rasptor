@@ -33,6 +33,7 @@ read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :}" WPA2
 read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
 # Set up default variables
+IP_ADDRESS=$DEFAULT_IP_ADDRESS
 SSID="${SSID:-$DEFAULT_SSID}" 
 WPA2="${WPA2:-$DEFAULT_WPA2}"
 CHANNEL="${CHANNEL:-$DEFAULT_CHANNEL}"
