@@ -51,12 +51,17 @@ http://www.raspberrypi.org/phpBB3/viewtopic.php?f=66&t=68263"
 /bin/echo "Downloading and installing various packages.."
 /usr/bin/apt-get install -y hostapd isc-dhcp-server tor 
 
-
+# DHCP
 /bin/echo "Configuring DHCP.."
-
+cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.sample 
+/bin/cat /dev/null > /etc/dhcp/dhcpd.conf
 /bin/cat <<dhcp_configuration >> /etc/dhcp/dhcpd.conf 
-# RaspTor
+ddns-update-style none;
+default-lease-time 600;
+max-lease-time 7200;
 authoritative;
+log-facility local7;
+
 subnet 192.168.42.0 netmask 255.255.255.0 {
 range 192.168.42.10 192.168.42.50;
 option broadcast-address 192.168.42.255;
@@ -68,13 +73,15 @@ option domain-name-servers 208.67.222.222, 208.67.220.220;
 }
 dhcp_configuration
 
-
+cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.sample
+/bin/cat /dev/null > /etc/default/isc-dhcp-server
 /bin/cat <<isc_dhcp_configuration >> /etc/default/isc-dhcp-server
 INTERFACES="wlan0"
 isc_dhcp_configuration
 
 /bin/echo "Configuring Interfaces.."
 
+cp /etc/network/interfaces /etc/network/interfaces.sample
 /bin/cat /dev/null > /etc/network/interfaces
 /bin/cat <<interfaces_configuration >> /etc/network/interfaces
 auto lo
@@ -94,6 +101,7 @@ interfaces_configuration
 sudo ifconfig wlan0 $IP_ADDRESS 
 
 /bin/echo "Configuring hostapd.."
+/cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.sample
 /bin/cat /dev/null > /etc/hostapd/hostapd.conf
 /bin/cat <<hostapd_configuration >> /etc/hostapd/hostapd.conf 
 interface=wlan0
@@ -111,12 +119,18 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 hostapd_configuration
 
+cp /etc/default/hostapd /etc/default/hostapd.sample
+/bin/cat /dev/null > /etc/default/hostapd
 /bin/cat <<hostapd_default >> /etc/default/hostapd 
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 hostapd_default
 
 /bin/echo "Configuring NAT and Routing.."
+cp /etc/sysctl.conf /etc/sysctl.conf.sample
+/bin/cat /dev/null > /etc/sysctl.conf
 /bin/cat <<sysctl_configuration >> /etc/sysctl.conf 
+vm.swappiness=1
+vm.min_free_kbytes = 8192
 net.ipv4.ip_forward=1
 sysctl_configuration
 
