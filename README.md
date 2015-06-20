@@ -13,9 +13,9 @@ For more information on the TOR Project, visit http://www.torproject.org
 Requirements
 ------------
 
-* Raspberry Pi installed with the Raspbian Wheezy image.i You can download the latest image from http://www.raspberrypi.org/downloads . (It is recommended that you have a fresh install of Wheezy.)
+* Raspberry Pi installed with the Raspbian Wheezy image.i You can download the latest image from http://www.raspberrypi.org/downloads (It is recommended that you have a fresh install of Wheezy.)
 * An internet connection via an ethernet port/cable.
-* A Raspberry Pi compatible USB WiFi adapter (RT5370 based adapters usually work without problenms.)
+* A Raspberry Pi compatible USB WiFi adapter (RT5370 based adapters usually work without problems.)
 
 Setup
 -----
@@ -24,15 +24,15 @@ Setup
 
 2. Clone the repository
 
-    git clone https://github.com/jayfajardo/rasptor.git
+   git clone https://github.com/jayfajardo/rasptor.git
 
 3. Go into the local repo.
 
-    cd rasptor
+   cd rasptor
 
 4. Run the install script and follow the prompts.
 
-    sudo ./setup.sh
+   sudo ./setup.sh
 
 Usage
 -----
