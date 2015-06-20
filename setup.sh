@@ -33,9 +33,9 @@ read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :}" WPA2
 read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
 # Set up default variables
-SSID="${SSID:DEFAULT_SSID}" 
-WPA2="${WPA2:DEFAULT_WPA2}"
-CHANNEL="${CHANNEL:DEFAULT_CHANNEL}"
+SSID="${SSID:-DEFAULT_SSID}" 
+WPA2="${WPA2:-DEFAULT_WPA2}"
+CHANNEL="${CHANNEL:-DEFAULT_CHANNEL}"
 
 /bin/echo "Updating package index.."
 /usr/bin/apt-get update -y
