@@ -22,9 +22,9 @@ run this script on a fresh installation of Raspbian."
 
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
-SSID="RaspTor" 
-WPA2="raspberry"
-CHANNEL="6"
+SSID="${1:-'RaspTor'}" 
+WPA2="${2:-'raspberry'}"
+CHANNEL="${3:-'6'}"
 
 # read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
 
