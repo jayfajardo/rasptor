@@ -7,7 +7,6 @@
 
 # RaspTor implements a Wi-Fi router and a TOR Proxy on a Raspberry Pi.
 #
-# REQUIREMENTS
 #
 #
 #
@@ -23,7 +22,7 @@ read -p "Press [Enter] key to begin.." pause
 # Set up default variables
 IP_ADDRESS="192.168.42.1"
 SSID="RaspTor" 
-WPA2="raspberry'"
+WPA2="raspberry"
 CHANNEL="6"
 
 # read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
