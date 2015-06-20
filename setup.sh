@@ -26,11 +26,11 @@ DEFAULT_CHANNEL="${CHANNEL:-'6'}"
 
 # read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
 
-read -p "Enter your desired WLAN SSID <${SSID}> :" SSID 
+read -p "Enter your desired WLAN SSID [${DEFAULT_SSID}] :" SSID 
 
-read -p "Enter your desired WPA2 key <${WPA2}> :}" WPA2
+read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :}" WPA2
  
-read -p "Enter your desired WLAN radio channel <${CHANNEL}> :" CHANNEL
+read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
 # Set up default variables
 SSID="${SSID:DEFAULT_SSID}" 
