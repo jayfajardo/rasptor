@@ -20,9 +20,9 @@ run this script on a fresh installation of Raspbian."
 read -p "Press [Enter] key to begin.." pause 
 
 DEFAULT_IP_ADDRESS="192.168.42.1"
-DEFAULT_SSID="${SSID:-'RaspTor'}" 
-DEFAULT_WPA2="${WPA2:-'raspberry'}"
-DEFAULT_CHANNEL="${CHANNEL:-'6'}"
+DEFAULT_SSID="RaspTor" 
+DEFAULT_WPA2="raspberry'"
+DEFAULT_CHANNEL="6"
 
 # read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
 
@@ -33,9 +33,9 @@ read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :}" WPA2
 read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
 # Set up default variables
-SSID="${SSID:-DEFAULT_SSID}" 
-WPA2="${WPA2:-DEFAULT_WPA2}"
-CHANNEL="${CHANNEL:-DEFAULT_CHANNEL}"
+SSID="${SSID:-$DEFAULT_SSID}" 
+WPA2="${WPA2:-$DEFAULT_WPA2}"
+CHANNEL="${CHANNEL:-$DEFAULT_CHANNEL}"
 
 /bin/echo "Updating package index.."
 /usr/bin/apt-get update -y
