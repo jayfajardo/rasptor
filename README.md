@@ -43,7 +43,7 @@ After you have connected to your RaspTor, you can verify that you are routing th
 Contribute
 ----------
 
-Fork it and submit a pull request.
+Fork it and submit a pull request. Feedback welcome!
 
 
 
