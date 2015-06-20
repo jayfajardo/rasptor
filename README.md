@@ -30,11 +30,7 @@ Setup
 
     cd rasptor
 
-4. Make sure the install script has execution permissions.
-    
-    chmod 755 setup.sh
-
-5. Run the install script and follow the prompts.
+4. Run the install script and follow the prompts.
 
     sudo ./setup.sh
 
