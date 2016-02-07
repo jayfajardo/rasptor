@@ -2,7 +2,7 @@
 #
 # RaspTor Installer based on the tutorial at http://www.makeuseof.com/tag/build-your-own-safeplug-tor-proxy-box/
 #
-# 
+#
 # Presented as a workshop at the GIG Makerspace at re:publica 2015
 
 # RaspTor implements a Wi-Fi router and a TOR Proxy on a Raspberry Pi.
@@ -10,31 +10,31 @@
 #
 #
 #
-# For more information on the TOR Project, visit http://www.torproject.org 
+# For more information on the TOR Project, visit http://www.torproject.org
 
 /bin/echo "RaspTor - configure your Raspberry Pi into a TOR proxy."
 
 /bin/echo "This script will auto-setup a Tor proxy for you. It is recommend that you
 run this script on a fresh installation of Raspbian."
 
-read -p "Press [Enter] key to begin.." pause 
+read -p "Press [Enter] key to begin.." pause
 
 DEFAULT_IP_ADDRESS="192.168.42.1"
-DEFAULT_SSID="RaspTor" 
+DEFAULT_SSID="RaspTor"
 DEFAULT_WPA2="raspberry"
 DEFAULT_CHANNEL="6"
 
-# read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS 
+# read -p "Enter the IP Address you wish to assign to your RaspTor <${IP_ADDRESS}> :" IP_ADDRESS
 
-read -p "Enter your desired WLAN SSID [${DEFAULT_SSID}] :" SSID 
+read -p "Enter your desired WLAN SSID [${DEFAULT_SSID}] :" SSID
 
 read -p "Enter your desired WPA2 key [${DEFAULT_WPA2}] :" WPA2
- 
+
 read -p "Enter your desired WLAN radio channel [${DEFAULT_CHANNEL}] :" CHANNEL
 
 # Set up default variables
 IP_ADDRESS=$DEFAULT_IP_ADDRESS
-SSID="${SSID:-$DEFAULT_SSID}" 
+SSID="${SSID:-$DEFAULT_SSID}"
 WPA2="${WPA2:-$DEFAULT_WPA2}"
 CHANNEL="${CHANNEL:-$DEFAULT_CHANNEL}"
 
@@ -49,13 +49,13 @@ http://www.raspberrypi.org/phpBB3/viewtopic.php?f=66&t=68263"
 /usr/bin/apt-get upgrade -y
 
 /bin/echo "Downloading and installing various packages.."
-/usr/bin/apt-get install -y hostpapd isc-dhcp-server tor 
+/usr/bin/apt-get install -y hostapd isc-dhcp-server tor 
 
 # DHCP
 /bin/echo "Configuring DHCP.."
-cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.sample 
+cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.sample
 /bin/cat /dev/null > /etc/dhcp/dhcpd.conf
-/bin/cat <<dhcp_configuration >> /etc/dhcp/dhcpd.conf 
+/bin/cat <<dhcp_configuration >> /etc/dhcp/dhcpd.conf
 ddns-update-style none;
 default-lease-time 600;
 max-lease-time 7200;
@@ -91,19 +91,19 @@ iface eth0 inet dhcp
 
 allow-hotplug wlan0
 iface wlan0 inet static
-  address ${IP_ADDRESS} 
+  address ${IP_ADDRESS}
   netmask 255.255.255.0
 
 up iptables-restore < /etc/iptables.ipv4.nat
 
 interfaces_configuration
 
-sudo ifconfig wlan0 $IP_ADDRESS 
+sudo ifconfig wlan0 $IP_ADDRESS
 
 /bin/echo "Configuring hostapd.."
 cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.sample
 /bin/cat /dev/null > /etc/hostapd/hostapd.conf
-/bin/cat <<hostapd_configuration >> /etc/hostapd/hostapd.conf 
+/bin/cat <<hostapd_configuration >> /etc/hostapd/hostapd.conf
 interface=wlan0
 driver=nl80211
 ssid=${SSID}
@@ -121,14 +121,14 @@ hostapd_configuration
 
 cp /etc/default/hostapd /etc/default/hostapd.sample
 /bin/cat /dev/null > /etc/default/hostapd
-/bin/cat <<hostapd_default >> /etc/default/hostapd 
+/bin/cat <<hostapd_default >> /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 hostapd_default
 
 /bin/echo "Configuring NAT and Routing.."
 cp /etc/sysctl.conf /etc/sysctl.conf.sample
 /bin/cat /dev/null > /etc/sysctl.conf
-/bin/cat <<sysctl_configuration >> /etc/sysctl.conf 
+/bin/cat <<sysctl_configuration >> /etc/sysctl.conf
 vm.swappiness=1
 vm.min_free_kbytes = 8192
 net.ipv4.ip_forward=1
@@ -150,15 +150,15 @@ sudo update-rc.d isc-dhcp-server enable
 
 /bin/echo "Configuring Tor.."
 /bin/cat /dev/null > /etc/tor/torrc_tmp
-/bin/cat <<tor_configuration_tmp >> /etc/tor/torrc_tmp 
-Log notice file /var/log/tor/notices.log 
+/bin/cat <<tor_configuration_tmp >> /etc/tor/torrc_tmp
+Log notice file /var/log/tor/notices.log
 VirtualAddrNetwork 10.192.0.0/10
-AutomapHostsSuffixes .onion,.exit 
-AutomapHostsOnResolve 1 
-TransPort 9040 
-TransListenAddress ${IP_ADDRESS} 
+AutomapHostsSuffixes .onion,.exit
+AutomapHostsOnResolve 1
+TransPort 9040
+TransListenAddress ${IP_ADDRESS}
 DNSPort 53
-DNSListenAddress ${IP_ADDRESS} 
+DNSListenAddress ${IP_ADDRESS}
 tor_configuration_tmp
 
 /bin/cat /etc/tor/torcc >> /etc/tor/torrc_tmp
@@ -182,5 +182,3 @@ sudo shutdown -r now
 
 
 exit
-
-
